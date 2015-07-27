@@ -3,7 +3,6 @@ title: API Reference
 
 language_tabs:
   - shell
-  - ruby
   - python
 
 toc_footers:
@@ -16,23 +15,33 @@ includes:
 search: true
 ---
 
-# Introduction (Testing - Rockerbox 2)
+# Crusher APIs
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+This example API documentation page was created with [Slate](http://github.com/tripit/slate).
 
-This example API documentation page was created with [Slate](http://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+# General
 
-# Authentication
+You can use the Crusher APIs to fetch information about the visitors and pages on your website. 
+
+## Query Parameters
+
+There are some query parameters that are common among all of the Crusher APIs:
+
+Parameter | Default | Description
+--------- | ------- | -----------
+format | None | If set to json, the API will return JSON data.
+logic | should | If set to must, the result will include kittens that have already been adopted.
+
+<aside class="success">
+Remember — a happy kitten is an authenticated kitten!
+</aside>
+
+
+# Count
 
 > To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
 
 ```python
 import kittn
