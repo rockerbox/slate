@@ -9,4 +9,6 @@ RUN cd /app; bundle install
 ADD . /app
 EXPOSE 4567
 WORKDIR /app
-CMD ["bundle", "exec", "middleman", "server"]
+#CMD ["bundle", "exec", "middleman", "server"]
+CMD ["git", "pull", "origin", "master"]
+CMD ["/bin/bash"]
