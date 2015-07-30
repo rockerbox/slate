@@ -19,11 +19,26 @@ includes:
 search: true
 ---
 
-# On-site Activity APIs 
+# Crusher
 
-These allow us to get back information about on-site user activity.
+Crusher allows you to look at the on-site activity user and determine how the on-site activity is influenced by a users off-site browsing activity.
+These are the APIs that power crusher and make it possible to analyze on-site versus off-site activity.
 
-# Authorization
+## Background
+
+Crusher is a collection of analytics, machine learning and ad-buying technologies that make it possible for a user to: 
+
+- collect information about on-site and off-site activity
+- classify and understand how these behaviors influence each other
+- target ads based on how these classifications differ
+
+based on on-site and off-site activity. 
+
+## Authorization
+
+We need to add authorization to all of these services and remove the advertiser parameter from the API.
+
+We will be reusing our authentication and just need to label the endpoints are authenticated in python with the appropriate decorator.
 
 ### Cookie-based
 
