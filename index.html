@@ -26,7 +26,7 @@
       </span>
     </a>
     <div class="tocify-wrapper">
-      <img src="images/logo.png" />
+      <img src="logo.png" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
               <a href="#" data-language-name="python">python</a>
@@ -45,114 +45,238 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="crusher-apis">Crusher APIs</h1>
+        <h1 id="crusher">Crusher</h1>
 
-<p>You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>Crusher allows you to look at the on-site activity user and determine how the on-site activity is influenced by a users off-site browsing activity.
+These are the APIs that power crusher and make it possible to analyze on-site versus off-site activity.</p>
 
-<p>This example API documentation page was created with <a href="http://github.com/tripit/slate">Slate</a>.</p>
+<h2 id="background">Background</h2>
 
-<h1 id="general">General</h1>
+<p>Crusher is a collection of analytics, machine learning and ad-buying technologies that make it possible for a user to: </p>
 
-<p>You can use the Crusher APIs to fetch information about the visitors and pages on your website. </p>
+<ul>
+<li>collect information about on-site and off-site activity</li>
+<li>classify and understand how these behaviors influence each other</li>
+<li>target ads based on these different classifications </li>
+</ul>
 
-<h2 id="query-parameters">Query Parameters</h2>
+<h2 id="authorization">Authorization</h2>
 
-<p>There are some query parameters that are common among all of the Crusher APIs:</p>
+<p>We need to add authorization to all of these services and remove the advertiser parameter from the API.</p>
 
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>format</td>
-<td>None</td>
-<td>If set to json, the API will return JSON data.</td>
-</tr>
-<tr>
-<td>logic</td>
-<td>should</td>
-<td>If set to must, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
+<p>We will be reusing our authentication and just need to label the endpoints are authenticated in python with the appropriate decorator.</p>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
+<h3 id="cookie-based">Cookie-based</h3>
 
-<h1 id="count">Count</h1>
+<h3 id="header-based">Header-based</h3>
 
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<h1 id="on-site-activity">On-site Activity</h1>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
+<p>These APIs allow us to search for a particular pattern or group of patterns that occur on the query string of the on-page url. 
+The search APIs give us the ability to look at the following characterstics about a patterns:</p>
+
+<ul>
+<li>URLs: these are the URLs that match the pattern</li>
+<li>UIDs: these are the UIDs that match the pattern</li>
+<li>Count: this gives us a summary about the pattern</li>
+<li>Timeseries: this gives us a timeseries summary about how the pattern changes over time</li>
+</ul>
+
+          <h2 id="url-search">URL Search</h2>
 
 <blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
+<p>Request (count for a single pattern): </p>
 </blockquote>
+<pre class="highlight shell"><code><span class="c"># TODO: !!</span>
+<span class="c"># current -- needs format and advertiser on end of URL "&amp;format=json&amp;advertiser=baublebar"</span>
+<span class="c"># proposed -- use authentication</span>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+curl <span class="s2">"http://crusher.getrockerbox.com/crusher/search/count?search=necklaces"</span> 
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-<h1 id="kittens">Kittens</h1>
-
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre>
 
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Response (count for single pattern):</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"logic"</span><span class="p">:</span><span class="w"> </span><span class="s2">"should"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"search"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"necklaces"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"num_users"</span><span class="p">:</span><span class="w"> </span><span class="mi">1200</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves all kittens.</p>
+<blockquote>
+<p>Request 
+- urls that match pattern</p>
+</blockquote>
+<pre class="highlight shell"><code>
+curl <span class="s2">"http://crusher.getrockerbox.com/crusher/search/urls?search=rockerbox"</span>
+</code></pre>
+
+<blockquote>
+<p>Response 
+- urls that match pattern</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="o">{</span>
+    <span class="s2">"logic"</span>: <span class="s2">"must"</span>,
+    <span class="s2">"results"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"count"</span>: 1,
+            <span class="s2">"url"</span>: <span class="s2">"http://www.baublebar.com/whats-new/just-added.html?cvosrc=display.rockerbox.072015_JulyDigAdsRefresh_300x250_3_9718787&amp;utm_source=rockerbox&amp;utm_medium=display&amp;utm_campaign=072015_JulyDigAdsRefresh_300x250_3_9718787"</span>
+        <span class="o">}</span>,
+        <span class="o">{</span>
+            <span class="s2">"count"</span>: 1,
+            <span class="s2">"url"</span>: <span class="s2">"http://www.baublebar.com/whats-new/just-added.html?cvosrc=display.rockerbox.072015_JulyDigAdsRefresh_300x600_1_4279296&amp;utm_source=rockerbox&amp;utm_medium=display&amp;utm_campaign=072015_JulyDigAdsRefresh_300x600_1_4279296"</span>
+        <span class="o">}</span>,
+        <span class="o">{</span>
+            <span class="s2">"count"</span>: 1,
+            <span class="s2">"url"</span>: <span class="s2">"http://www.baublebar.com/whats-new/just-added.html?cvosrc=display.rockerbox.072015_JulyDigAdsRefresh_728x90_1_3810899&amp;utm_source=rockerbox&amp;utm_medium=display&amp;utm_campaign=072015_JulyDigAdsRefresh_728x90_1_3810899"</span>
+        <span class="o">}</span>
+    <span class="o">]</span>,
+    <span class="s2">"search"</span>: <span class="o">[</span>
+        <span class="s2">"rockerbox"</span>
+    <span class="o">]</span>,
+    <span class="s2">"summary"</span>: <span class="o">{</span>
+        <span class="s2">"num_urls"</span>: 3,
+        <span class="s2">"num_users"</span>: 3
+    <span class="o">}</span>,
+    <span class="s2">"timeout"</span>: 60
+<span class="o">}</span>
+</code></pre>
+
+<blockquote>
+<p>Request 
+- uids for multiple patterns using <strong>AND</strong> logic</p>
+</blockquote>
+<pre class="highlight shell"><code>
+<span class="c"># TODO: !!</span>
+<span class="c"># current (defaults to or)</span>
+<span class="c"># propsoed (should default to AND)</span>
+curl <span class="s2">"http://crusher.getrockerbox.com/crusher/search/uids?search=necklaces,pepperjam"</span>
+</code></pre>
+
+<blockquote>
+<p>Response 
+- uids for multiple patterns using <strong>AND</strong> logic</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="o">{</span>
+    <span class="s2">"logic"</span>: <span class="s2">"must"</span>,
+    <span class="s2">"results"</span>: <span class="o">[</span>
+        <span class="s2">"1658345989907319038"</span>,
+        <span class="s2">"8544236950523550015"</span>,
+        <span class="s2">"3647988598677495450"</span>,
+        <span class="s2">"8377247509133269564"</span>,
+        <span class="s2">"8728953026525723133"</span>,
+        <span class="s2">"4371882728305824796"</span>,
+        <span class="s2">"4355801865744751912"</span>,
+        <span class="s2">"3071870354224070944"</span>,
+        <span class="s2">"8282590386514880072"</span>,
+        <span class="s2">"5213257658303005847"</span>,
+        <span class="s2">"682573251720908722"</span>
+    <span class="o">]</span>,
+    <span class="s2">"search"</span>: <span class="o">[</span>
+        <span class="s2">"necklaces"</span>,
+        <span class="s2">"pepperjam"</span>
+    <span class="o">]</span>,
+    <span class="s2">"summary"</span>: <span class="o">{</span>
+        <span class="s2">"num_users"</span>: 11
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+<blockquote>
+<p>Request 
+- timeseries for multiple patterns using <strong>AND</strong> logic</p>
+</blockquote>
+<pre class="highlight shell"><code>
+<span class="c"># TODO: !!</span>
+<span class="c"># current (defaults to or)</span>
+<span class="c"># propsoed (should default to AND)</span>
+curl <span class="s2">"http://crusher.getrockerbox.com/crusher/search/timeseries?search=necklaces,pepperjam"</span>
+</code></pre>
+
+<blockquote>
+<p>Response 
+- timeseries for multiple patterns using <strong>AND</strong> logic</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="o">{</span>
+    <span class="s2">"logic"</span>: <span class="s2">"must"</span>,
+    <span class="s2">"results"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"date"</span>: <span class="s2">"2015-07-29 00:00:00"</span>,
+            <span class="s2">"num_users"</span>: 4,
+            <span class="s2">"num_visits"</span>: 5
+        <span class="o">}</span>,
+        <span class="o">{</span>
+            <span class="s2">"date"</span>: <span class="s2">"2015-07-30 00:00:00"</span>,
+            <span class="s2">"num_users"</span>: 7,
+            <span class="s2">"num_visits"</span>: 7
+        <span class="o">}</span>
+    <span class="o">]</span>,
+    <span class="s2">"search"</span>: <span class="o">[</span>
+        <span class="s2">"necklaces"</span>,
+        <span class="s2">"pepperjam"</span>
+    <span class="o">]</span>,
+    <span class="s2">"summary"</span>: <span class="o">{</span>
+        <span class="s2">"num_users"</span>: 11,
+        <span class="s2">"num_visits"</span>: 12
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+<blockquote>
+<p>Request 
+- timeseries for multiple patterns using <strong>OR</strong> logic</p>
+</blockquote>
+<pre class="highlight shell"><code>
+curl <span class="s2">"http://crusher.getrockerbox.com/crusher/search/timeseries?search=necklaces,pepperjam&amp;logic=or"</span>
+</code></pre>
+
+<blockquote>
+<p>Response 
+- timeseries for multiple patterns using <strong>OR</strong> logic</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="o">{</span>
+    <span class="s2">"logic"</span>: <span class="s2">"should"</span>,
+    <span class="s2">"results"</span>: <span class="o">[</span>
+        <span class="o">{</span>
+            <span class="s2">"date"</span>: <span class="s2">"2015-07-29 00:00:00"</span>,
+            <span class="s2">"num_users"</span>: 708,
+            <span class="s2">"num_visits"</span>: 2327
+        <span class="o">}</span>,
+        <span class="o">{</span>
+            <span class="s2">"date"</span>: <span class="s2">"2015-07-30 00:00:00"</span>,
+            <span class="s2">"num_users"</span>: 993,
+            <span class="s2">"num_visits"</span>: 2858
+        <span class="o">}</span>
+    <span class="o">]</span>,
+    <span class="s2">"search"</span>: <span class="o">[</span>
+        <span class="s2">"necklaces"</span>,
+        <span class="s2">"pepperjam"</span>
+    <span class="o">]</span>,
+    <span class="s2">"summary"</span>: <span class="o">{</span>
+        <span class="s2">"num_users"</span>: 1653,
+        <span class="s2">"num_visits"</span>: 5185
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+
+<p>This endpoint allows us to search for the occurance of a pattern or multiple patterns within a single URL.</p>
+
+<p>The pattern search API supports:</p>
+
+<ul>
+<li>four query result types (urls, uids, count, timeseries).</li>
+<li>two types of logic when searching for a pattern within a URL (&ldquo;or&rdquo;,&ldquo;and&rdquo;)</li>
+</ul>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
+<p><code class="prettyprint">GET http://crusher.getrockerbox.com/crusher/search/&lt;QUERY_TYPE&gt;</code></p>
 
 <h3 id="query-parameters">Query Parameters</h3>
 
@@ -164,67 +288,190 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>search</td>
+<td>None</td>
+<td>this is a <em>required</em> field. it is a string or comman seperated string of terms  we will look for in the URL. If multiple terms are used, the logic parameter will be used param will be used to perform the search</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>logic</td>
+<td>and</td>
+<td>this specifies the logic to use for a search term. specifically, if we are looking for nature,nuture in a url, or would require either nature or nuture, and would require both nature and nuture</td>
+</tr>
+<tr>
+<td>format</td>
+<td>json</td>
+<td>this specifies the response type. currently only json is supported</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>60</td>
+<td>this is the amount of time in seconds we will attempt to process the query before timing out. Its default and max value is 60 seconds</td>
 </tr>
 </tbody></table>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
+<aside class="default">Note that the search field is required for all queries</aside>
 
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h3 id="json-response">JSON Response</h3>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">If you&rsquo;re not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
-
-<h3 id="url-parameters">URL Parameters</h3>
+<p>The JSON response will be formatted with the following fields:</p>
 
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Field</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>search</td>
+<td>these are the terms entered as commas seperated values to the search QS parameter</td>
+</tr>
+<tr>
+<td>logic</td>
+<td>this is the logic used interally to evaluate URLs against the pattern(s) specified</td>
+</tr>
+<tr>
+<td>summary</td>
+<td>this is a summary object describing the results. depending on the query type it will have different values but will always be present</td>
+</tr>
+<tr>
+<td>results</td>
+<td>the result object is based on the query type. It will be present for all results with the exception of the count, which will only have a summary object</td>
+</tr>
+</tbody></table>
+
+<h3 id="json-result-objects">JSON Result Objects</h3>
+
+<p>This describes the different JSON Result object types that one can expect for the different query types</p>
+
+<table><thead>
+<tr>
+<th>Query Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>urls</td>
+<td>this is a list of objects that contain the URL and the number of matches for that url. it will be sorted based on count</td>
+</tr>
+<tr>
+<td>uids</td>
+<td>this is a list of UID strings associated with the pattern</td>
+</tr>
+<tr>
+<td>timeseries</td>
+<td>this is a timeseries which shows the counts at each respective date</td>
+</tr>
+</tbody></table>
+
+<aside class="warning">Note that the **count** query type does not have a results object present</aside>
+
+          <h2 id="multiple-url-search">Multiple URL Search</h2>
+
+<p>This endpoint allows us search for users who visited multiple URL patterns and get the union or intersection of the visits that have occured on these matched pages.</p>
+
+<p>Similar to the the single URL search, this API support:</p>
+
+<ul>
+<li>the query result types: (uids,count,timeseries)</li>
+<li>two type of logic: (union, intersection)</li>
+</ul>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://crusher.getrockerbox.com/crusher/pattern_search/&lt;QUERY_TYPE&gt;</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>search</td>
+<td>None</td>
+<td>this is a <strong>required</strong> field. the search string is made up of comman seperated patterns and pipe seperated pattern groups. the comma seperated pattern requires all occurances of the pattern to be present in matched urls. the pipe seperation between pattern allows one to look at either the union or intersection of the users who have visited urls that matched the pattern string.</td>
+</tr>
+<tr>
+<td>logic</td>
+<td>intersection</td>
+<td>this specifies whether were looking at the union or intersection of the pattern strings. A union results in reporting based on all the patterns matched. An intersection is looking at the intersection of the two patterns</td>
+</tr>
+<tr>
+<td>format</td>
+<td>json</td>
+<td>this specifies the response type. currently only json is supported</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>60</td>
+<td>this is the amount of time in seconds we will attempt to process the query before timing out. Its default and max value is 60 seconds</td>
+</tr>
+</tbody></table>
+
+<h3 id="more-on-the-quot-search-quot-and-quot-logic-quot-parameters">More on the &ldquo;search&rdquo; and &ldquo;logic&rdquo; parameters</h3>
+
+<p>The search parameter is made up of multiple <strong>URL pattern strings</strong> seperated by pipe characters. 
+A <strong>URL pattern string</strong> is a comma seperated string of values, e.g. &ldquo;nature,nuture&rdquo;.
+When this API evaluates a URL pattern string, the indivual patterns will be evaluated using an  <strong>AND</strong> operation, meaning that every url that matches this pattern must contain all terms in the string.</p>
+
+<p>The following is an example of two URL pattern strings used as a search parameter:</p>
+
+<p><code class="prettyprint">/crusher/pattern_search?search=nature,nuture|wild</code></p>
+
+<p>Each URL pattern string is used to find the users associated with each URL pattern string.</p>
+
+<table><thead>
+<tr>
+<th>Pattern</th>
+<th>Users</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>nature,nuture</td>
+<td>User group 1</td>
+</tr>
+<tr>
+<td>wild</td>
+<td>User group 2</td>
+</tr>
+</tbody></table>
+
+<p>The logic parameter will then be used to either take the union or the intersection of the users that match. </p>
+
+<table><thead>
+<tr>
+<th>Logic</th>
+<th>Matches</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Union</td>
+<td>users who match any of the patterns</td>
+</tr>
+<tr>
+<td>Intersection</td>
+<td>users who many all of the patterns</td>
+</tr>
+</tbody></table>
+
+<p>Finally, the eligible users will be selected out of the overall data set and an aggregated result will be returned. Specifically,</p>
+
+<table><thead>
+<tr>
+<th>Logic</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Union</td>
+<td>This is an aggregation of all of the resulting patterns</td>
+</tr>
+<tr>
+<td>Intersection</td>
+<td>The resulting data set is an aggregation of all (URL, user) combinations from any pattern in search parameter but limited to the subset of the user groups</td>
 </tr>
 </tbody></table>
 
