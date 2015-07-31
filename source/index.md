@@ -30,9 +30,7 @@ Crusher is a collection of analytics, machine learning and ad-buying technologie
 
 - collect information about on-site and off-site activity
 - classify and understand how these behaviors influence each other
-- target ads based on how these classifications differ
-
-based on on-site and off-site activity. 
+- target ads based on these different classifications 
 
 ## Authorization
 
