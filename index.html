@@ -60,6 +60,25 @@ These are the APIs that power crusher and make it possible to analyze on-site ve
 <li>target ads based on these different classifications </li>
 </ul>
 
+<h2 id="important-terms">Important Terms</h2>
+
+<p>These are standard terms that are used when referring to different components within crusher. 
+They allow us to use common language when thinking about how different pieces of crusher are related to on another.</p>
+
+<h3 id="event">Event</h3>
+
+<p>An event is an atomic unit of interaction on an advertisers website. Currently this is limited to page views and conversions but may expand in the future to include javascript triggered events such as expanding images, scrolling, etc. </p>
+
+<h3 id="action">Action</h3>
+
+<p>An action is a group of events that are all related to the same functionality. For instance, an action may be used to describe all landing pages, even though the individual url for each landing page is different. </p>
+
+<h3 id="funnel">Funnel</h3>
+
+<p>A funnel is a group of actions that occur (often sequentially) that is used to predict a goal. For instance, a user that visits a landing page, a product page and converts would represent a funnel.</p>
+
+<h1 id="authentication">Authentication</h1>
+
 <h2 id="authorization">Authorization</h2>
 
 <p>We need to add authorization to all of these services and remove the advertiser parameter from the API.</p>
@@ -82,7 +101,7 @@ The search APIs give us the ability to look at the following characterstics abou
 <li>Timeseries: this gives us a timeseries summary about how the pattern changes over time</li>
 </ul>
 
-          <h2 id="url-search">URL Search</h2>
+          <h2 id="pattern-search">Pattern search</h2>
 
 <blockquote>
 <p>Request (count for a single pattern): </p>
@@ -365,9 +384,9 @@ curl <span class="s2">"http://crusher.getrockerbox.com/crusher/search/timeseries
 
 <aside class="warning">Note that the **count** query type does not have a results object present</aside>
 
-          <h2 id="multiple-url-search">Multiple URL Search</h2>
+          <h2 id="pattern-group-url-search">Pattern Group URL Search</h2>
 
-<p>This endpoint allows us search for users who visited multiple URL patterns and get the union or intersection of the visits that have occured on these matched pages.</p>
+<p>This endpoint allows us search for users who visited multiple URL patterns and get the union or intersection of the visits that have occured on these matched pages. </p>
 
 <p>Similar to the the single URL search, this API support:</p>
 
@@ -472,6 +491,185 @@ When this API evaluates a URL pattern string, the indivual patterns will be eval
 <tr>
 <td>Intersection</td>
 <td>The resulting data set is an aggregation of all (URL, user) combinations from any pattern in search parameter but limited to the subset of the user groups</td>
+</tr>
+</tbody></table>
+
+          <h2 id="multi-pattern-group-search">Multi Pattern Group search</h2>
+
+<p>This endpoint allows us search for statistics about the sequential intersection of multiple pattern groups. This API builds off of the pattern group concept introduced in the [Pattern Group URL Search] API.</p>
+
+<p>Similar to the the Pattern Group URL search, this API shares the idea of the pattern group, but limits the logic of a pattern group to look only at the union of a pattern. </p>
+
+<p>Similar to the other search APIs. this API allows the user to specify:</p>
+
+<ul>
+<li>the logic used between pattern groups (union, funnel)</li>
+<li>the result type: (count, uids, domains)</li>
+</ul>
+
+<p>To represent the logic between pattern groups, the &ldquo;&gt;&rdquo; operator is used to demarcate distinct pattern groups. This operators was chosen because it helps to represent the sequential nature of the computed intersection (the default behavior of the API).</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://crusher.getrockerbox.com/crusher/multi_pattern_search/&lt;QUERY_TYPE&gt;</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>search</td>
+<td>None</td>
+<td>this is a <strong>required</strong> field. the search string is made up of &gt; seperated pattern groups. See the pattern group API to</td>
+</tr>
+<tr>
+<td>logic</td>
+<td>funnel</td>
+<td>this specifies whether were looking at the union or intersection of the pattern groups.</td>
+</tr>
+<tr>
+<td>format</td>
+<td>json</td>
+<td>this specifies the response type. currently only json is supported</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>60</td>
+<td>this is the amount of time in seconds we will attempt to process the query before timing out. Its default and max value is 60 seconds</td>
+</tr>
+</tbody></table>
+
+<h3 id="more-about-multiple-pattern-group-evaluation">More about multiple pattern group evaluation</h3>
+
+<p>The search parameter is made up of multiple pattern groups seperated by <strong>&gt;</strong> characters. </p>
+
+<p><code class="prettyprint">
+?search=[pattern_group1]&gt;[pattern_group_2]&gt;[pattern_group_3]
+</code></p>
+
+<p>When this API evaluates each pattern group, it uses the default <strong>UNION</strong> logic to evaluate the pattern group meaning that all users who visited a URL that matched either pattern in a group are included. Also note that within a pattern the default <strong>AND</strong> logic is also used.</p>
+
+<h3 id="logic-operator">Logic Operator</h3>
+
+<p>The <strong>&gt;</strong> operator then takes the result of each pattern group and evaluates either:</p>
+
+<ul>
+<li>a sequential intersection (a funnel)</li>
+<li>a union (a union)</li>
+</ul>
+
+<h3 id="logic-types">Logic Types:</h3>
+
+<p><strong>1. Funnel (Sequential intersection)</strong></p>
+
+<p>The default behavior is to perform a sequential intersection (funnel) of users. More specifically, this is best described as:</p>
+
+<table><thead>
+<tr>
+<th>Step</th>
+<th>Users</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>User in Group 1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>User in Group 1 AND Group 2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>User in Group 1 AND Group 2 AND Group 3</td>
+</tr>
+</tbody></table>
+
+<p>implying that each sequential group will be smaller than the previous. </p>
+
+<p><strong>2. Union</strong></p>
+
+<p>The union logic type is included to make it convienent to get back information about the entire state space that the intersection is operating over. </p>
+
+<p>More specifically, we can describe this as follows:</p>
+
+<table><thead>
+<tr>
+<th>Step</th>
+<th>Users</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>User in Group 1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>User in Group 1 OR Group 2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>User in Group 1 OR Group 2 OR Group 3</td>
+</tr>
+</tbody></table>
+
+<p>implying that each sequential group will be larger than the previous. </p>
+
+<h3 id="response-types">Response Types</h3>
+
+<p><strong>1. count</strong></p>
+
+<ul>
+<li>this is the count of users in each bucket</li>
+</ul>
+
+<p><strong>2. uids</strong></p>
+
+<ul>
+<li>this is the raw user ids for users in each bucket</li>
+</ul>
+
+<p><strong>3. domains</strong></p>
+
+<ul>
+<li>this is the domain associated with the users in each bucket</li>
+</ul>
+
+<p><strong>4. all</strong></p>
+
+<ul>
+<li>this is all of the information</li>
+</ul>
+
+<h3 id="example">Example</h3>
+
+<p>The following is an example of two URL pattern strings used as a search parameter:</p>
+
+<p><code class="prettyprint">/crusher/multi_pattern_search?search=signup&gt;nature|wild&gt;checkout</code></p>
+
+<p>Our evaluation for each step would then look like the following:</p>
+
+<table><thead>
+<tr>
+<th>Step</th>
+<th>Users</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>Visited signup page</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Visited signup page AND visited a (nature OR wild) urls</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Visited signup page AND visited a (nature OR wild) urls AND checked out</td>
 </tr>
 </tbody></table>
 
