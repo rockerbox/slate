@@ -1,6 +1,6 @@
-## Multiple URL Search
+## Pattern Group URL Search
 
-This endpoint allows us search for users who visited multiple URL patterns and get the union or intersection of the visits that have occured on these matched pages.
+This endpoint allows us search for users who visited multiple URL patterns and get the union or intersection of the visits that have occured on these matched pages. 
 
 Similar to the the single URL search, this API support:
 

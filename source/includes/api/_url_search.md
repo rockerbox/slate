@@ -1,4 +1,4 @@
-## URL Search
+## Pattern search
 
 > Request (count for a single pattern): 
 

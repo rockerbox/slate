@@ -12,6 +12,7 @@ toc_footers:
 includes:
   - api/url_search
   - api/multiple_url_search
+  - api/_sequential_url_pattern_search
 
   - errors
 
@@ -31,6 +32,25 @@ Crusher is a collection of analytics, machine learning and ad-buying technologie
 - collect information about on-site and off-site activity
 - classify and understand how these behaviors influence each other
 - target ads based on these different classifications 
+
+## Important Terms
+
+These are standard terms that are used when referring to different components within crusher. 
+They allow us to use common language when thinking about how different pieces of crusher are related to on another.
+
+### Event
+
+An event is an atomic unit of interaction on an advertisers website. Currently this is limited to page views and conversions but may expand in the future to include javascript triggered events such as expanding images, scrolling, etc. 
+
+### Action
+
+An action is a group of events that are all related to the same functionality. For instance, an action may be used to describe all landing pages, even though the individual url for each landing page is different. 
+
+### Funnel
+
+A funnel is a group of actions that occur (often sequentially) that is used to predict a goal. For instance, a user that visits a landing page, a product page and converts would represent a funnel.
+
+# Authentication
 
 ## Authorization
 
