@@ -12,7 +12,7 @@ toc_footers:
 includes:
   - api/url_search
   - api/multiple_url_search
-  - api/_sequential_url_pattern_search
+  - api/sequential_url_pattern_search
 
   - errors
 
@@ -54,13 +54,54 @@ A funnel is a group of actions that occur (often sequentially) that is used to p
 
 ## Authorization
 
-We need to add authorization to all of these services and remove the advertiser parameter from the API.
-
-We will be reusing our authentication and just need to label the endpoints are authenticated in python with the appropriate decorator.
+Most of our APIs require authentication. We demonstrate here how to login using cookie-based authentication.
 
 ### Cookie-based
 
+> Use the `/login` endpoint, saving your cookie in a file to use for future requests
+
+```shell
+curl -b cookie -c cookie -X POST -d '{"username": "my_user", "password": "my_pw"}' "portal.getrockerbox.com/login"
+```
+
+To log in using the cookie-based authentication, send a `POST` request to `portal.getrockerbox.com/login` with an object containing the username and password assigned to you by Rockerbox. 
+
+You'll need to have cookies enabled in order to use your credentials in future requests. If using curl, use the `-b` and `-c` options to read/write your cookie from disk.
+
 ### Header-based
+
+Rick doesn't like APIs that don't have this as an option, so we're going to make this a thing...at some point.
+
+### Permissions
+
+> Request
+
+```shell
+curl -b cookie -c cookie "portal.getrockerbox.com/account/permissions"
+```
+
+> Response
+
+```json
+{
+    "results": [
+        {
+            "external_advertiser_id": 987654,
+            "pixel_source_name": "examle_advertiser_1",
+            "advertiser_name": "Example Advertiser One",
+            "selected": true
+        },
+        {
+            "external_advertiser_id": 123456,
+            "pixel_source_name": "example_advertiser_2",
+            "advertiser_name": "Example Advertiser Two",
+            "selected": false
+        }
+    ]
+}
+```
+
+Once authenticated, you can use `/account/permissions` to view the advertisers you have access to.
 
 # On-site Activity 
 
