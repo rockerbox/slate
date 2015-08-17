@@ -81,13 +81,54 @@ They allow us to use common language when thinking about how different pieces of
 
 <h2 id="authorization">Authorization</h2>
 
-<p>We need to add authorization to all of these services and remove the advertiser parameter from the API.</p>
-
-<p>We will be reusing our authentication and just need to label the endpoints are authenticated in python with the appropriate decorator.</p>
+<p>Most of our APIs require authentication. We demonstrate here how to login using cookie-based authentication.</p>
 
 <h3 id="cookie-based">Cookie-based</h3>
 
+<blockquote>
+<p>Use the <code class="prettyprint">/login</code> endpoint, saving your cookie in a file to use for future requests</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -b cookie -c cookie -X POST -d <span class="s1">'{"username": "my_user", "password": "my_pw"}'</span> <span class="s2">"portal.getrockerbox.com/login"</span>
+</code></pre>
+
+<p>To log in using the cookie-based authentication, send a <code class="prettyprint">POST</code> request to <code class="prettyprint">portal.getrockerbox.com/login</code> with an object containing the username and password assigned to you by Rockerbox. </p>
+
+<p>You&rsquo;ll need to have cookies enabled in order to use your credentials in future requests. If using curl, use the <code class="prettyprint">-b</code> and <code class="prettyprint">-c</code> options to read/write your cookie from disk.</p>
+
 <h3 id="header-based">Header-based</h3>
+
+<p>Rick doesn&rsquo;t like APIs that don&rsquo;t have this as an option, so we&rsquo;re going to make this a thing&hellip;at some point.</p>
+
+<h3 id="permissions">Permissions</h3>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -b cookie -c cookie <span class="s2">"portal.getrockerbox.com/account/permissions"</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"external_advertiser_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">987654</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"pixel_source_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"examle_advertiser_1"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"advertiser_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example Advertiser One"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"selected"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"external_advertiser_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">123456</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"pixel_source_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example_advertiser_2"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"advertiser_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Example Advertiser Two"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"selected"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Once authenticated, you can use <code class="prettyprint">/account/permissions</code> to view the advertisers you have access to.</p>
 
 <h1 id="on-site-activity">On-site Activity</h1>
 
