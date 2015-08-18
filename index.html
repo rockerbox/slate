@@ -147,12 +147,7 @@ The search APIs give us the ability to look at the following characterstics abou
 <blockquote>
 <p>Request (count for a single pattern): </p>
 </blockquote>
-<pre class="highlight shell"><code><span class="c"># TODO: !!</span>
-<span class="c"># current -- needs format and advertiser on end of URL "&amp;format=json&amp;advertiser=baublebar"</span>
-<span class="c"># proposed -- use authentication</span>
-
-curl <span class="s2">"http://crusher.getrockerbox.com/crusher/search/count?search=necklaces"</span> 
-
+<pre class="highlight shell"><code>curl <span class="s2">"http://crusher.getrockerbox.com/crusher/search/count?search=necklaces"</span> 
 </code></pre>
 
 <blockquote>
@@ -213,9 +208,6 @@ curl <span class="s2">"http://crusher.getrockerbox.com/crusher/search/urls?searc
 - uids for multiple patterns using <strong>AND</strong> logic</p>
 </blockquote>
 <pre class="highlight shell"><code>
-<span class="c"># TODO: !!</span>
-<span class="c"># current (defaults to or)</span>
-<span class="c"># propsoed (should default to AND)</span>
 curl <span class="s2">"http://crusher.getrockerbox.com/crusher/search/uids?search=necklaces,pepperjam"</span>
 </code></pre>
 
@@ -253,9 +245,6 @@ curl <span class="s2">"http://crusher.getrockerbox.com/crusher/search/uids?searc
 - timeseries for multiple patterns using <strong>AND</strong> logic</p>
 </blockquote>
 <pre class="highlight shell"><code>
-<span class="c"># TODO: !!</span>
-<span class="c"># current (defaults to or)</span>
-<span class="c"># propsoed (should default to AND)</span>
 curl <span class="s2">"http://crusher.getrockerbox.com/crusher/search/timeseries?search=necklaces,pepperjam"</span>
 </code></pre>
 
