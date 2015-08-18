@@ -66,14 +66,20 @@ These are the APIs that power crusher and make it possible to analyze on-site ve
 They allow us to use common language when thinking about how different pieces of crusher are related to on another.</p>
 
 <h3 id="event">Event</h3>
+<pre class="highlight plaintext"><code># Example of an event
+</code></pre>
 
 <p>An event is an atomic unit of interaction on an advertisers website. Currently this is limited to page views and conversions but may expand in the future to include javascript triggered events such as expanding images, scrolling, etc. </p>
 
 <h3 id="action">Action</h3>
+<pre class="highlight plaintext"><code># Example of an action
+</code></pre>
 
 <p>An action is a group of events that are all related to the same functionality. For instance, an action may be used to describe all landing pages, even though the individual url for each landing page is different. </p>
 
 <h3 id="funnel">Funnel</h3>
+<pre class="highlight plaintext"><code># Example of a funnel
+</code></pre>
 
 <p>A funnel is a group of actions that occur (often sequentially) that is used to predict a goal. For instance, a user that visits a landing page, a product page and converts would represent a funnel.</p>
 
@@ -83,28 +89,60 @@ They allow us to use common language when thinking about how different pieces of
 
 <p>Most of our APIs require authentication. We demonstrate here how to login using cookie-based authentication.</p>
 
-<h3 id="cookie-based">Cookie-based</h3>
+<p>To log in, send a <code class="prettyprint">POST</code> request to <code class="prettyprint">crusher.getrockerbox.com/login</code> with an object containing the username and password assigned to you by Rockerbox.</p>
 
 <blockquote>
 <p>Use the <code class="prettyprint">/login</code> endpoint, saving your cookie in a file to use for future requests</p>
 </blockquote>
-<pre class="highlight shell"><code>curl -b cookie -c cookie -X POST -d <span class="s1">'{"username": "my_user", "password": "my_pw"}'</span> <span class="s2">"portal.getrockerbox.com/login"</span>
+<pre class="highlight shell"><code>cat <span class="sh">&lt;&lt;EOF &gt; creds
+{
+    "username": "my_user", 
+    "password": "my_pw"
+}
+EOF
+
+</span>curl -b cookie -c cookie -X POST -d @creds <span class="s2">"crusher.getrockerbox.com/login"</span>
 </code></pre>
 
-<p>To log in using the cookie-based authentication, send a <code class="prettyprint">POST</code> request to <code class="prettyprint">portal.getrockerbox.com/login</code> with an object containing the username and password assigned to you by Rockerbox. </p>
+<h3 id="http-request">HTTP Request</h3>
 
-<p>You&rsquo;ll need to have cookies enabled in order to use your credentials in future requests. If using curl, use the <code class="prettyprint">-b</code> and <code class="prettyprint">-c</code> options to read/write your cookie from disk.</p>
+<p><code class="prettyprint">POST http://crusher.getrockerbox.com/login</code></p>
 
-<h3 id="header-based">Header-based</h3>
+<h3 id="request-payload">Request Payload</h3>
+
+<p>Formatted as a json object, you must include the following values as part of your <code class="prettyprint">POST</code>:</p>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>the username that was provided by Rockerbox upon receiving your account</td>
+</tr>
+<tr>
+<td>password</td>
+<td>the password that was provided by Rockerbox upon receiving your account</td>
+</tr>
+</tbody></table>
+
+<h4 id="cookie-based">Cookie-based</h4>
+
+<p>For cookie-based login, you will need to have the cookies that we set as a result of this request included on future requests. 
+If using curl, use the <code class="prettyprint">-b</code> and <code class="prettyprint">-c</code> options to read/write your cookie from disk.</p>
+
+<h4 id="header-based">Header-based</h4>
 
 <p>Rick doesn&rsquo;t like APIs that don&rsquo;t have this as an option, so we&rsquo;re going to make this a thing&hellip;at some point.</p>
 
-<h3 id="permissions">Permissions</h3>
+<h2 id="permissions">Permissions</h2>
 
 <blockquote>
 <p>Request</p>
 </blockquote>
-<pre class="highlight shell"><code>curl -b cookie -c cookie <span class="s2">"portal.getrockerbox.com/account/permissions"</span>
+<pre class="highlight shell"><code>curl -b cookie -c cookie <span class="s2">"crusher.getrockerbox.com/account/permissions"</span>
 </code></pre>
 
 <blockquote>
@@ -130,7 +168,150 @@ They allow us to use common language when thinking about how different pieces of
 
 <p>Once authenticated, you can use <code class="prettyprint">/account/permissions</code> to view the advertisers you have access to.</p>
 
-<h1 id="on-site-activity">On-site Activity</h1>
+          <h1 id="model-apis">Model APIs</h1>
+
+<h2 id="action">Action</h2>
+
+<p>Actions are our fundamental block for understand both on-site and off-site user behavior. 
+Actions allow the user to specify a series of patterns that correspond to central idea or theme of on-site behavior. 
+Below we take you through how to view, create, update and delete an action.</p>
+
+<p>All activities related to actions require the user to be logged in.</p>
+
+<h3 id="anatomy-of-an-action">Anatomy of an action</h3>
+
+<blockquote>
+<p>Example action</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"action_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"action_name"</span><span class="p">:</span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"pixel_source_name"</span><span class="p">:</span><span class="s2">"my_advertiser"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url_pattern"</span><span class="p">:[</span><span class="s2">"checkout"</span><span class="p">],</span><span class="w">
+    </span><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"or"</span><span class="p">,</span><span class="w">         </span><span class="err">//deprecated</span><span class="w">
+    </span><span class="nt">"start_date"</span><span class="p">:</span><span class="s2">"15-04-01"</span><span class="p">,</span><span class="w"> </span><span class="err">//deprecated</span><span class="w">
+    </span><span class="nt">"end_date"</span><span class="p">:</span><span class="s2">"15-04-22"</span><span class="w">    </span><span class="err">//deprecated</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Every action will have the following items in its response:</p>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>action_id</td>
+<td>this is an auto generated identifier for the action. this identifier will be use later to relate actions to funnels</td>
+</tr>
+<tr>
+<td>url_pattern</td>
+<td>this is an array of strings that are used to match against the url associated with an event</td>
+</tr>
+<tr>
+<td>operator</td>
+<td>by default, this should only be set to &ldquo;or&rdquo;. The behavior associated with an &ldquo;and&rdquo; operator can be achieved by comma seperating strings</td>
+</tr>
+<tr>
+<td>pixel_source_name</td>
+<td>this is the advertiser that the action is associated with</td>
+</tr>
+</tbody></table>
+
+<h3 id="todos">TODOs:</h3>
+
+<ul>
+<li>rename pixel_source_name to advertiser</li>
+<li>potentially get rid of operator from this response. it probably isnt necessary anymore given our lookup using lucene</li>
+<li>remove the date ranges from the action response</li>
+<li>lets change the default response type to json so that it doesnt need to be on the url and a format=json</li>
+</ul>
+
+<h3 id="get-all-actions">Get all actions</h3>
+
+<blockquote>
+<p>Request (all actions)</p>
+</blockquote>
+<pre class="highlight shell"><code>curl http://crusher.getrockerbox.com/crusher/funnel/action?format<span class="o">=</span>json
+</code></pre>
+
+<blockquote>
+<p>Response (all actions)</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"pixel_source_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"baublebar"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"checkout"</span><span class="w"> </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"pixel_source_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"baublebar"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"necklaces utm"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"utm"</span><span class="w"> </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>To view all the actions that you have created, you can simply send a get request to the action endpoint with the format query string parameter set to json.</p>
+
+<p><code class="prettyprint">GET http://crusher.getrockerbox.com/crusher/funnel/action?format=json</code></p>
+
+<p>The response will consist of a list of action objects, which are defined above in the <strong>Anatomy of an action</strong>.</p>
+
+<h3 id="todos">TODOs:</h3>
+
+<ul>
+<li>this should be within our standard response format</li>
+<li>want to transition all the APIs so that we have them within a wrapping object</li>
+</ul>
+
+<h3 id="get-a-specific-action">Get a specific action</h3>
+
+<blockquote>
+<p>Request (specific action)</p>
+</blockquote>
+<pre class="highlight shell"><code>curl http://crusher.getrockerbox.com/crusher/funnel/action?format<span class="o">=</span>json&amp;id<span class="o">=</span>1
+</code></pre>
+
+<blockquote>
+<p>Response (specific actions)</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"pixel_source_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"baublebar"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"checkout"</span><span class="w"> </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>To view a specific action, the request is modified to additional query string parameter specifying the id of the action you would like to view.</p>
+
+<p><code class="prettyprint">GET http://crusher.getrockerbox.com/crusher/funnel/action?format=json&amp;id=&lt;ACTION_ID&gt;</code></p>
+
+<p>In this case, rather than return a list we instead see that a single action is returned for our response</p>
+
+<h3 id="creating-an-action">Creating an action</h3>
+
+<p><code class="prettyprint">POST http://crusher.getrockerbox.com/crusher/funnel/action?format=json</code></p>
+
+<h3 id="updating-an-action">Updating an action</h3>
+
+<p><code class="prettyprint">PUT http://crusher.getrockerbox.com/crusher/funnel/action?format=json&amp;id=&lt;ACTION_ID&gt;</code></p>
+
+<h3 id="deleting-an-action">Deleting an action</h3>
+
+<p><code class="prettyprint">DELETE http://crusher.getrockerbox.com/crusher/funnel/action?format=json&amp;id=&lt;ACTION_ID&gt;</code></p>
+
+          <h2 id="funnel">Funnel</h2>
+
+<p>asdf</p>
+
+          <h1 id="activity-data-apis">Activity Data APIs</h1>
 
 <p>These APIs allow us to search for a particular pattern or group of patterns that occur on the query string of the on-page url. 
 The search APIs give us the ability to look at the following characterstics about a patterns:</p>
@@ -414,7 +595,7 @@ curl <span class="s2">"http://crusher.getrockerbox.com/crusher/search/timeseries
 
 <aside class="warning">Note that the **count** query type does not have a results object present</aside>
 
-          <h2 id="pattern-group-url-search">Pattern Group URL Search</h2>
+          <h2 id="group-url-search">Group URL Search</h2>
 
 <p>This endpoint allows us search for users who visited multiple URL patterns and get the union or intersection of the visits that have occured on these matched pages. </p>
 
