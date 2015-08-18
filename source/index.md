@@ -10,9 +10,14 @@ toc_footers:
   - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
 includes:
+  - api/action
+  - api/funnel
+  - api/onsite
   - api/url_search
   - api/multiple_url_search
   - api/sequential_url_pattern_search
+
+
 
   - errors
 
@@ -138,16 +143,6 @@ curl -b cookie -c cookie "crusher.getrockerbox.com/account/permissions"
 ```
 
 Once authenticated, you can use `/account/permissions` to view the advertisers you have access to.
-
-# On-site Activity 
-
-These APIs allow us to search for a particular pattern or group of patterns that occur on the query string of the on-page url. 
-The search APIs give us the ability to look at the following characterstics about a patterns:
-
-- URLs: these are the URLs that match the pattern
-- UIDs: these are the UIDs that match the pattern
-- Count: this gives us a summary about the pattern
-- Timeseries: this gives us a timeseries summary about how the pattern changes over time
 
 
 
