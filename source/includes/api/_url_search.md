@@ -3,12 +3,7 @@
 > Request (count for a single pattern): 
 
 ```shell
-# TODO: !!
-# current -- needs format and advertiser on end of URL "&format=json&advertiser=baublebar"
-# proposed -- use authentication
-
 curl "http://crusher.getrockerbox.com/crusher/search/count?search=necklaces" 
-
 ```
 
 > Response (count for single pattern):
@@ -69,9 +64,6 @@ curl "http://crusher.getrockerbox.com/crusher/search/urls?search=rockerbox"
 
 ```shell
 
-# TODO: !!
-# current (defaults to or)
-# propsoed (should default to AND)
 curl "http://crusher.getrockerbox.com/crusher/search/uids?search=necklaces,pepperjam"
 ```
 
@@ -110,9 +102,6 @@ curl "http://crusher.getrockerbox.com/crusher/search/uids?search=necklaces,peppe
 
 ```shell
 
-# TODO: !!
-# current (defaults to or)
-# propsoed (should default to AND)
 curl "http://crusher.getrockerbox.com/crusher/search/timeseries?search=necklaces,pepperjam"
 ```
 
