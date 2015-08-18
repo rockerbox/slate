@@ -40,13 +40,25 @@ They allow us to use common language when thinking about how different pieces of
 
 ### Event
 
+```
+# Example of an event
+```
+
 An event is an atomic unit of interaction on an advertisers website. Currently this is limited to page views and conversions but may expand in the future to include javascript triggered events such as expanding images, scrolling, etc. 
 
 ### Action
 
+```
+# Example of an action
+```
+
 An action is a group of events that are all related to the same functionality. For instance, an action may be used to describe all landing pages, even though the individual url for each landing page is different. 
 
 ### Funnel
+
+```
+# Example of a funnel
+```
 
 A funnel is a group of actions that occur (often sequentially) that is used to predict a goal. For instance, a user that visits a landing page, a product page and converts would represent a funnel.
 
@@ -56,28 +68,52 @@ A funnel is a group of actions that occur (often sequentially) that is used to p
 
 Most of our APIs require authentication. We demonstrate here how to login using cookie-based authentication.
 
-### Cookie-based
+To log in, send a `POST` request to `crusher.getrockerbox.com/login` with an object containing the username and password assigned to you by Rockerbox.
 
 > Use the `/login` endpoint, saving your cookie in a file to use for future requests
 
 ```shell
-curl -b cookie -c cookie -X POST -d '{"username": "my_user", "password": "my_pw"}' "portal.getrockerbox.com/login"
+cat <<EOF > creds
+{
+    "username": "my_user", 
+    "password": "my_pw"
+}
+EOF
+
+curl -b cookie -c cookie -X POST -d @creds "crusher.getrockerbox.com/login"
 ```
 
-To log in using the cookie-based authentication, send a `POST` request to `portal.getrockerbox.com/login` with an object containing the username and password assigned to you by Rockerbox. 
+### HTTP Request
 
-You'll need to have cookies enabled in order to use your credentials in future requests. If using curl, use the `-b` and `-c` options to read/write your cookie from disk.
+`POST http://crusher.getrockerbox.com/login`
 
-### Header-based
+### Request Payload
+
+Formatted as a json object, you must include the following values as part of your `POST`:
+
+Key | Description
+--- | -----
+username | the username that was provided by Rockerbox upon receiving your account
+password | the password that was provided by Rockerbox upon receiving your account
+
+
+#### Cookie-based
+
+
+
+For cookie-based login, you will need to have the cookies that we set as a result of this request included on future requests. 
+If using curl, use the `-b` and `-c` options to read/write your cookie from disk.
+
+#### Header-based
 
 Rick doesn't like APIs that don't have this as an option, so we're going to make this a thing...at some point.
 
-### Permissions
+## Permissions
 
 > Request
 
 ```shell
-curl -b cookie -c cookie "portal.getrockerbox.com/account/permissions"
+curl -b cookie -c cookie "crusher.getrockerbox.com/account/permissions"
 ```
 
 > Response
