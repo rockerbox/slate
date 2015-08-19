@@ -52,36 +52,28 @@ url_pattern | this is an array of strings that are used to match against the url
 operator | by default, this should only be set to "or". The behavior associated with an "and" operator can be achieved by comma seperating strings
 advertiser | this is the advertiser that the action is associated with
 
-### TODOs: 
-
-- DONE rename pixel_source_name to advertiser
-- DONE potentially get rid of operator from this response. it probably isnt necessary anymore given our lookup using lucene
-- DONE remove the date ranges from the action response
-- DONE lets change the default response type to json so that it doesnt need to be on the url and a format=json
-
-
 
 ### Get all actions
 
-> Request (all actions)
+> Request All
 
 ```shell
 curl http://crusher.getrockerbox.com/crusher/funnel/action?format=json
 ```
 
-> Response (all actions)
+> Response All
 
 ```json
 {
     "response":[
         {
-            "advertiser": "baublebar",
+            "advertiser": "my_advertiser",
             "action_name": "checkout",
             "url_pattern": [ "checkout" ],
             "action_id": 1
         },
         {
-            "advertiser": "baublebar",
+            "advertiser": "my_advertiser",
             "action_name": "necklaces utm",
             "url_pattern": [ "utm" ],
             "action_id": 15
@@ -96,26 +88,21 @@ To view all the actions that you have created, you can simply send a get request
 
 The response will consist of a list of action objects, which are defined above in the **Anatomy of an action**.
 
-### TODOs: 
-
-- DONE this should be within our standard response format
-- DONE want to transition all the APIs so that we have them within a wrapping object
-
 
 ### Get a specific action
 
-> Request (specific action)
+> Request One
 
 ```shell
 curl http://crusher.getrockerbox.com/crusher/funnel/action?format=json&id=1
 ```
 
-> Response (specific actions)
+> Response One
 
 ```json
 {
     "response":[{
-        "advertiser": "baublebar",
+        "advertiser": "my_advertiser",
         "action_name": "checkout",
         "url_pattern": [ "checkout" ],
         "action_id": 1
@@ -131,8 +118,29 @@ In this case, rather than return a list we instead see that a single action is r
 
 ### Creating an action
 
-```shell
+> Create
 
+```shell
+cat <<EOF > action
+{
+    "action_name": "checkout",
+    "url_pattern": [ "checkout" ],
+}
+EOF
+curl -X POST -d @action http://crusher.getrockerbox.com/crusher/funnel/action
+```
+
+> Response
+
+```json
+{
+    "response":{
+        "advertiser": "my_advertiser",
+        "action_name": "checkout",
+        "url_pattern": [ "checkout" ],
+        "action_id": 1
+    }
+}
 ```
 
 To create a new action, post a json object that has a name to identify the action, `action_name`, and a list of patterns you want to match in the `url_pattern`.
@@ -144,9 +152,58 @@ The response from this endpoint will be a standard action json object described 
 
 ### Updating an action
 
+> Update
+
+```bash
+cat <<EOF > action
+{
+    "action_id": 1,
+    "action_name": "checkout",
+    "url_pattern": [ "checkOUT" ],
+}
+EOF
+curl -X PUT -d @action http://crusher.getrockerbox.com/crusher/funnel/action?action_id=1
+```
+
+> Response
+
+```json
+{
+    "response":{
+        "advertiser": "my_advertiser",
+        "action_name": "checkout",
+        "url_pattern": [ "checkOUT" ],
+        "action_id": 1
+    }
+}
+```
+
+To update an action, put a json object with the desired changes to an endpoint which has an `action_id` qs parameter corresponding to the object you want to update.
+
 `PUT http://crusher.getrockerbox.com/crusher/funnel/action?format=json&id=<ACTION_ID>`
+
+The response will be the standard json object.
 
 ### Deleting an action
 
+> DELETE
+
+```bash
+curl -X DELETE http://crusher.getrockerbox.com/crusher/funnel/action?action_id=1
+```
+
+> Response
+
+```json
+{
+    "response":{
+        "action_id": 1
+    }
+}
+```
+
+To delete an action, send a delete request to the endpoint with the `action_id` qs parameter corresponding to the object you want to delete.
+
 `DELETE http://crusher.getrockerbox.com/crusher/funnel/action?format=json&id=<ACTION_ID>`
 
+The response will be an object with only the action_id of the deleted object.
