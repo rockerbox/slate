@@ -1,5 +1,25 @@
 # Model APIs
 
+The model APIs allow us to model information that we receive from an on page pixel. These APIs are the building blocks for our UI and allow the user to store saved and recurring data queries.
+
+### Generic anatomy of a Response
+
+```json
+{
+    "response": [],
+    "summary": {},
+    "errors": []
+}
+```
+
+Each json response with have a similar format. Below we outline the high level stucture a user can expect from a JSON response.
+
+Key | Description
+--- | ----------
+response | (required) This is where the data relevant to the response lives. This will typically be an array of objects
+summary  | (optional) This is where any summary information about the request and response lives
+errors   | (optional) This is where any errors associated with the request live. This will typically be an array of objects
+
 ## Action
 
 Actions are our fundamental block for understand both on-site and off-site user behavior. 
