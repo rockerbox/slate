@@ -22,6 +22,18 @@ errors   | (optional) This is where any errors associated with the request live.
 
 ## Action
 
+> Example action
+
+```json
+{
+    "action_id": 1,
+    "action_name": "checkout",
+    "acvertiser": "my_advertiser",
+    "url_pattern": ["checkout"]
+}
+```
+
+
 Actions are our fundamental block for understand both on-site and off-site user behavior. 
 Actions allow the user to specify a series of patterns that correspond to central idea or theme of on-site behavior. 
 Below we take you through how to view, create, update and delete an action.
@@ -30,20 +42,6 @@ All activities related to actions require the user to be logged in.
 
 ### Anatomy of an action
 
-> Example action
-
-```json
-{
-    "action_id":1,
-    "action_name":"checkout",
-    "pixel_source_name":"my_advertiser",
-    "url_pattern":["checkout"],
-    "operator":"or",         //deprecated
-    "start_date":"15-04-01", //deprecated
-    "end_date":"15-04-22"    //deprecated
-
-}
-```
 
 Every action will have the following items in its response:
 
@@ -52,14 +50,14 @@ Key | Description
 action_id | this is an auto generated identifier for the action. this identifier will be use later to relate actions to funnels
 url_pattern | this is an array of strings that are used to match against the url associated with an event
 operator | by default, this should only be set to "or". The behavior associated with an "and" operator can be achieved by comma seperating strings
-pixel_source_name | this is the advertiser that the action is associated with
+advertiser | this is the advertiser that the action is associated with
 
 ### TODOs: 
 
-- rename pixel_source_name to advertiser
-- potentially get rid of operator from this response. it probably isnt necessary anymore given our lookup using lucene
-- remove the date ranges from the action response
-- lets change the default response type to json so that it doesnt need to be on the url and a format=json
+- DONE rename pixel_source_name to advertiser
+- DONE potentially get rid of operator from this response. it probably isnt necessary anymore given our lookup using lucene
+- DONE remove the date ranges from the action response
+- DONE lets change the default response type to json so that it doesnt need to be on the url and a format=json
 
 
 
@@ -74,20 +72,22 @@ curl http://crusher.getrockerbox.com/crusher/funnel/action?format=json
 > Response (all actions)
 
 ```json
-[
-    {
-        "pixel_source_name": "baublebar",
-        "action_name": "checkout",
-        "url_pattern": [ "checkout" ],
-        "action_id": 1
-    },
-    {
-        "pixel_source_name": "baublebar",
-        "action_name": "necklaces utm",
-        "url_pattern": [ "utm" ],
-        "action_id": 15
-    }
-]
+{
+    "response":[
+        {
+            "advertiser": "baublebar",
+            "action_name": "checkout",
+            "url_pattern": [ "checkout" ],
+            "action_id": 1
+        },
+        {
+            "advertiser": "baublebar",
+            "action_name": "necklaces utm",
+            "url_pattern": [ "utm" ],
+            "action_id": 15
+        }
+    ]
+}
 ```
 
 To view all the actions that you have created, you can simply send a get request to the action endpoint with the format query string parameter set to json.
@@ -98,8 +98,8 @@ The response will consist of a list of action objects, which are defined above i
 
 ### TODOs: 
 
-- this should be within our standard response format
-- want to transition all the APIs so that we have them within a wrapping object
+- DONE this should be within our standard response format
+- DONE want to transition all the APIs so that we have them within a wrapping object
 
 
 ### Get a specific action
@@ -114,10 +114,12 @@ curl http://crusher.getrockerbox.com/crusher/funnel/action?format=json&id=1
 
 ```json
 {
-    "pixel_source_name": "baublebar",
-    "action_name": "checkout",
-    "url_pattern": [ "checkout" ],
-    "action_id": 1
+    "response":[{
+        "advertiser": "baublebar",
+        "action_name": "checkout",
+        "url_pattern": [ "checkout" ],
+        "action_id": 1
+    }]
 }
 ```
 
@@ -129,7 +131,16 @@ In this case, rather than return a list we instead see that a single action is r
 
 ### Creating an action
 
+```shell
+
+```
+
+To create a new action, post a json object that has a name to identify the action, `action_name`, and a list of patterns you want to match in the `url_pattern`.
+
 `POST http://crusher.getrockerbox.com/crusher/funnel/action?format=json`
+
+The response from this endpoint will be a standard action json object described above in the anatomy of an action.
+
 
 ### Updating an action
 
