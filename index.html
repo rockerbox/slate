@@ -170,6 +170,38 @@ If using curl, use the <code class="prettyprint">-b</code> and <code class="pret
 
           <h1 id="model-apis">Model APIs</h1>
 
+<p>The model APIs allow us to model information that we receive from an on page pixel. These APIs are the building blocks for our UI and allow the user to store saved and recurring data queries.</p>
+
+<h3 id="generic-anatomy-of-a-response">Generic anatomy of a Response</h3>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="nt">"errors"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Each json response with have a similar format. Below we outline the high level stucture a user can expect from a JSON response.</p>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>response</td>
+<td>(required) This is where the data relevant to the response lives. This will typically be an array of objects</td>
+</tr>
+<tr>
+<td>summary</td>
+<td>(optional) This is where any summary information about the request and response lives</td>
+</tr>
+<tr>
+<td>errors</td>
+<td>(optional) This is where any errors associated with the request live. This will typically be an array of objects</td>
+</tr>
+</tbody></table>
+
 <h2 id="action">Action</h2>
 
 <p>Actions are our fundamental block for understand both on-site and off-site user behavior. 
