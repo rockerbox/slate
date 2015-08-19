@@ -204,6 +204,17 @@ If using curl, use the <code class="prettyprint">-b</code> and <code class="pret
 
 <h2 id="action">Action</h2>
 
+<blockquote>
+<p>Example action</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"acvertiser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_advertiser"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"checkout"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 <p>Actions are our fundamental block for understand both on-site and off-site user behavior. 
 Actions allow the user to specify a series of patterns that correspond to central idea or theme of on-site behavior. 
 Below we take you through how to view, create, update and delete an action.</p>
@@ -211,21 +222,6 @@ Below we take you through how to view, create, update and delete an action.</p>
 <p>All activities related to actions require the user to be logged in.</p>
 
 <h3 id="anatomy-of-an-action">Anatomy of an action</h3>
-
-<blockquote>
-<p>Example action</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"action_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"action_name"</span><span class="p">:</span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"pixel_source_name"</span><span class="p">:</span><span class="s2">"my_advertiser"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"url_pattern"</span><span class="p">:[</span><span class="s2">"checkout"</span><span class="p">],</span><span class="w">
-    </span><span class="nt">"operator"</span><span class="p">:</span><span class="s2">"or"</span><span class="p">,</span><span class="w">         </span><span class="err">//deprecated</span><span class="w">
-    </span><span class="nt">"start_date"</span><span class="p">:</span><span class="s2">"15-04-01"</span><span class="p">,</span><span class="w"> </span><span class="err">//deprecated</span><span class="w">
-    </span><span class="nt">"end_date"</span><span class="p">:</span><span class="s2">"15-04-22"</span><span class="w">    </span><span class="err">//deprecated</span><span class="w">
-
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
 
 <p>Every action will have the following items in its response:</p>
 
@@ -248,45 +244,38 @@ Below we take you through how to view, create, update and delete an action.</p>
 <td>by default, this should only be set to &ldquo;or&rdquo;. The behavior associated with an &ldquo;and&rdquo; operator can be achieved by comma seperating strings</td>
 </tr>
 <tr>
-<td>pixel_source_name</td>
+<td>advertiser</td>
 <td>this is the advertiser that the action is associated with</td>
 </tr>
 </tbody></table>
 
-<h3 id="todos">TODOs:</h3>
-
-<ul>
-<li>rename pixel_source_name to advertiser</li>
-<li>potentially get rid of operator from this response. it probably isnt necessary anymore given our lookup using lucene</li>
-<li>remove the date ranges from the action response</li>
-<li>lets change the default response type to json so that it doesnt need to be on the url and a format=json</li>
-</ul>
-
 <h3 id="get-all-actions">Get all actions</h3>
 
 <blockquote>
-<p>Request (all actions)</p>
+<p>Request All</p>
 </blockquote>
 <pre class="highlight shell"><code>curl http://crusher.getrockerbox.com/crusher/funnel/action?format<span class="o">=</span>json
 </code></pre>
 
 <blockquote>
-<p>Response (all actions)</p>
+<p>Response All</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"pixel_source_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"baublebar"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"checkout"</span><span class="w"> </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"pixel_source_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"baublebar"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"necklaces utm"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"utm"</span><span class="w"> </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"response"</span><span class="p">:[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"advertiser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_advertiser"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"checkout"</span><span class="w"> </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"advertiser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_advertiser"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"necklaces utm"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"utm"</span><span class="w"> </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <p>To view all the actions that you have created, you can simply send a get request to the action endpoint with the format query string parameter set to json.</p>
@@ -295,29 +284,24 @@ Below we take you through how to view, create, update and delete an action.</p>
 
 <p>The response will consist of a list of action objects, which are defined above in the <strong>Anatomy of an action</strong>.</p>
 
-<h3 id="todos">TODOs:</h3>
-
-<ul>
-<li>this should be within our standard response format</li>
-<li>want to transition all the APIs so that we have them within a wrapping object</li>
-</ul>
-
 <h3 id="get-a-specific-action">Get a specific action</h3>
 
 <blockquote>
-<p>Request (specific action)</p>
+<p>Request One</p>
 </blockquote>
 <pre class="highlight shell"><code>curl http://crusher.getrockerbox.com/crusher/funnel/action?format<span class="o">=</span>json&amp;id<span class="o">=</span>1
 </code></pre>
 
 <blockquote>
-<p>Response (specific actions)</p>
+<p>Response One</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"pixel_source_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"baublebar"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"checkout"</span><span class="w"> </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="nt">"response"</span><span class="p">:[{</span><span class="w">
+        </span><span class="nt">"advertiser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_advertiser"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"checkout"</span><span class="w"> </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -329,15 +313,94 @@ Below we take you through how to view, create, update and delete an action.</p>
 
 <h3 id="creating-an-action">Creating an action</h3>
 
+<blockquote>
+<p>Create</p>
+</blockquote>
+<pre class="highlight shell"><code>cat <span class="sh">&lt;&lt;EOF &gt; action
+{
+    "action_name": "checkout",
+    "url_pattern": [ "checkout" ],
+}
+EOF
+</span>curl -X POST -d @action http://crusher.getrockerbox.com/crusher/funnel/action
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"response"</span><span class="p">:{</span><span class="w">
+        </span><span class="nt">"advertiser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_advertiser"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"checkout"</span><span class="w"> </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>To create a new action, post a json object that has a name to identify the action, <code class="prettyprint">action_name</code>, and a list of patterns you want to match in the <code class="prettyprint">url_pattern</code>.</p>
+
 <p><code class="prettyprint">POST http://crusher.getrockerbox.com/crusher/funnel/action?format=json</code></p>
+
+<p>The response from this endpoint will be a standard action json object described above in the anatomy of an action.</p>
 
 <h3 id="updating-an-action">Updating an action</h3>
 
+<blockquote>
+<p>Update</p>
+</blockquote>
+<pre class="highlight shell"><code>cat <span class="sh">&lt;&lt;EOF &gt; action
+{
+    "action_id": 1,
+    "action_name": "checkout",
+    "url_pattern": [ "checkOUT" ],
+}
+EOF
+</span>curl -X PUT -d @action http://crusher.getrockerbox.com/crusher/funnel/action?action_id<span class="o">=</span>1
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"response"</span><span class="p">:{</span><span class="w">
+        </span><span class="nt">"advertiser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_advertiser"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"checkOUT"</span><span class="w"> </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>To update an action, put a json object with the desired changes to an endpoint which has an <code class="prettyprint">action_id</code> qs parameter corresponding to the object you want to update.</p>
+
 <p><code class="prettyprint">PUT http://crusher.getrockerbox.com/crusher/funnel/action?format=json&amp;id=&lt;ACTION_ID&gt;</code></p>
+
+<p>The response will be the standard json object.</p>
 
 <h3 id="deleting-an-action">Deleting an action</h3>
 
+<blockquote>
+<p>DELETE</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X DELETE http://crusher.getrockerbox.com/crusher/funnel/action?action_id<span class="o">=</span>1
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"response"</span><span class="p">:{</span><span class="w">
+        </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>To delete an action, send a delete request to the endpoint with the <code class="prettyprint">action_id</code> qs parameter corresponding to the object you want to delete.</p>
+
 <p><code class="prettyprint">DELETE http://crusher.getrockerbox.com/crusher/funnel/action?format=json&amp;id=&lt;ACTION_ID&gt;</code></p>
+
+<p>The response will be an object with only the action_id of the deleted object.</p>
 
           <h2 id="funnel">Funnel</h2>
 
