@@ -20,7 +20,7 @@ response | (required) This is where the data relevant to the response lives. Thi
 summary  | (optional) This is where any summary information about the request and response lives
 errors   | (optional) This is where any errors associated with the request live. This will typically be an array of objects
 
-## Action
+# Action
 
 > Example action
 
@@ -40,9 +40,6 @@ Below we take you through how to view, create, update and delete an action.
 
 All activities related to actions require the user to be logged in.
 
-### Anatomy of an action
-
-
 Every action will have the following items in its response:
 
 Key | Description
@@ -53,7 +50,7 @@ operator | by default, this should only be set to "or". The behavior associated 
 advertiser | this is the advertiser that the action is associated with
 
 
-### Get all actions
+## Get all actions
 
 > Request All
 
@@ -89,7 +86,7 @@ To view all the actions that you have created, you can simply send a get request
 The response will consist of a list of action objects, which are defined above in the **Anatomy of an action**.
 
 
-### Get a specific action
+## Get a specific action
 
 > Request One
 
@@ -116,7 +113,7 @@ To view a specific action, the request is modified to additional query string pa
 
 In this case, rather than return a list we instead see that a single action is returned for our response
 
-### Creating an action
+## Creating an action
 
 > Create
 
@@ -150,7 +147,7 @@ To create a new action, post a json object that has a name to identify the actio
 The response from this endpoint will be a standard action json object described above in the anatomy of an action.
 
 
-### Updating an action
+## Updating an action
 
 > Update
 
@@ -184,7 +181,7 @@ To update an action, put a json object with the desired changes to an endpoint w
 
 The response will be the standard json object.
 
-### Deleting an action
+## Deleting an action
 
 > DELETE
 
