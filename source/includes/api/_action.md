@@ -159,7 +159,7 @@ cat <<EOF > action
     "url_pattern": [ "checkOUT" ],
 }
 EOF
-curl -X PUT -d @action http://crusher.getrockerbox.com/crusher/funnel/action?action_id=1
+curl -X PUT -d @action http://crusher.getrockerbox.com/crusher/funnel/action?id=1
 ```
 
 > Response
@@ -186,7 +186,7 @@ The response will be the standard json object.
 > DELETE
 
 ```bash
-curl -X DELETE http://crusher.getrockerbox.com/crusher/funnel/action?action_id=1
+curl -X DELETE http://crusher.getrockerbox.com/crusher/funnel/action?id=1
 ```
 
 > Response
