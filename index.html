@@ -259,6 +259,7 @@ Below we take you through how to view, create, update and delete an action.</p>
 <p>Response All</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"response"</span><span class="p">:[</span><span class="w">
         </span><span class="p">{</span><span class="w">
             </span><span class="nt">"advertiser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_advertiser"</span><span class="p">,</span><span class="w">
@@ -294,6 +295,7 @@ Below we take you through how to view, create, update and delete an action.</p>
 <p>Response One</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"response"</span><span class="p">:[{</span><span class="w">
         </span><span class="nt">"advertiser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_advertiser"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
@@ -327,6 +329,7 @@ EOF
 <p>Response</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"response"</span><span class="p">:{</span><span class="w">
         </span><span class="nt">"advertiser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_advertiser"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
@@ -361,6 +364,7 @@ EOF
 <p>Response</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"response"</span><span class="p">:{</span><span class="w">
         </span><span class="nt">"advertiser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"my_advertiser"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
@@ -388,6 +392,7 @@ EOF
 <p>Response</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"response"</span><span class="p">:{</span><span class="w">
         </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -403,9 +408,39 @@ EOF
           <h1 id="funnel">Funnel</h1>
 
 <blockquote>
-<p>Excample funnel</p>
+<p>Example funnel</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"owner"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"advertiser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"baublebar"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"funnel_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"utm"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"necklaces utm"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"http://www.baublebar.com/bracelets.html"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bracelets"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="s2">"checkout"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"funnel_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">96</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -420,64 +455,67 @@ EOF
 <blockquote>
 <p>Response All</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"owner"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"advertiser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"baublebar"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"funnel_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"utm"</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"necklaces utm"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"http://www.baublebar.com/bracelets.html"</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bracelets"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"checkout"</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"funnel_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">96</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"owner"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"advertiser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"baublebar"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"funnel_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alans"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"rockerbox"</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rockerbox bracelets"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">149</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"checkout"</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"funnel_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">117</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"owner"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"advertiser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"baublebar"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"funnel_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"utm"</span><span class="w">
+                    </span><span class="p">],</span><span class="w">
+                    </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"necklaces utm"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"http://www.baublebar.com/bracelets.html"</span><span class="w">
+                    </span><span class="p">],</span><span class="w">
+                    </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bracelets"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"checkout"</span><span class="w">
+                    </span><span class="p">],</span><span class="w">
+                    </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"funnel_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">96</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"owner"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"advertiser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"baublebar"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"funnel_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"alans"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"rockerbox"</span><span class="w">
+                    </span><span class="p">],</span><span class="w">
+                    </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rockerbox bracelets"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">149</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"checkout"</span><span class="w">
+                    </span><span class="p">],</span><span class="w">
+                    </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"funnel_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">117</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <h2 id="get-a-specific-funnel">Get a specific funnel</h2>
@@ -491,40 +529,43 @@ EOF
 <blockquote>
 <p>Response One</p>
 </blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"owner"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"advertiser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"baublebar"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"funnel_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"utm"</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"necklaces utm"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"http://www.baublebar.com/bracelets.html"</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bracelets"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"checkout"</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="nt">"funnel_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">96</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"owner"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"advertiser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"baublebar"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"funnel_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"utm"</span><span class="w">
+                    </span><span class="p">],</span><span class="w">
+                    </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"necklaces utm"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"http://www.baublebar.com/bracelets.html"</span><span class="w">
+                    </span><span class="p">],</span><span class="w">
+                    </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bracelets"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"url_pattern"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="s2">"checkout"</span><span class="w">
+                    </span><span class="p">],</span><span class="w">
+                    </span><span class="nt">"action_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkout"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"action_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="nt">"funnel_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">96</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <h2 id="creating-a-funnel">Creating a funnel</h2>
@@ -624,7 +665,7 @@ EOF
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
         </span><span class="nt">"advertiser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"baublebar"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"funnel_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOMETHING"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"actions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -655,7 +696,7 @@ EOF
         </span><span class="p">],</span><span class="w">
         </span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"owner"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"funnel_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">96</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -671,8 +712,10 @@ EOF
 <p>Response</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w"> 
-    </span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Funnel id 153 deleted successfully."</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"funnel_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">153</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -688,7 +731,7 @@ The search APIs give us the ability to look at the following characterstics abou
 <li>Timeseries: this gives us a timeseries summary about how the pattern changes over time</li>
 </ul>
 
-          <h2 id="pattern-search">Pattern search</h2>
+          <h1 id="pattern-search">Pattern search</h1>
 
 <blockquote>
 <p>Request (count for a single pattern): </p>
@@ -869,11 +912,11 @@ curl <span class="s2">"http://crusher.getrockerbox.com/crusher/search/timeseries
 <li>two types of logic when searching for a pattern within a URL (&ldquo;or&rdquo;,&ldquo;and&rdquo;)</li>
 </ul>
 
-<h3 id="http-request">HTTP Request</h3>
+<h2 id="http-request">HTTP Request</h2>
 
 <p><code class="prettyprint">GET http://crusher.getrockerbox.com/crusher/search/&lt;QUERY_TYPE&gt;</code></p>
 
-<h3 id="query-parameters">Query Parameters</h3>
+<h2 id="query-parameters">Query Parameters</h2>
 
 <table><thead>
 <tr>
@@ -906,7 +949,7 @@ curl <span class="s2">"http://crusher.getrockerbox.com/crusher/search/timeseries
 
 <aside class="default">Note that the search field is required for all queries</aside>
 
-<h3 id="json-response">JSON Response</h3>
+<h2 id="json-response">JSON Response</h2>
 
 <p>The JSON response will be formatted with the following fields:</p>
 
@@ -934,7 +977,7 @@ curl <span class="s2">"http://crusher.getrockerbox.com/crusher/search/timeseries
 </tr>
 </tbody></table>
 
-<h3 id="json-result-objects">JSON Result Objects</h3>
+<h2 id="json-result-objects">JSON Result Objects</h2>
 
 <p>This describes the different JSON Result object types that one can expect for the different query types</p>
 
@@ -960,7 +1003,7 @@ curl <span class="s2">"http://crusher.getrockerbox.com/crusher/search/timeseries
 
 <aside class="warning">Note that the **count** query type does not have a results object present</aside>
 
-          <h2 id="group-url-search">Group URL Search</h2>
+          <h1 id="group-url-search">Group URL Search</h1>
 
 <p>This endpoint allows us search for users who visited multiple URL patterns and get the union or intersection of the visits that have occured on these matched pages. </p>
 
@@ -971,11 +1014,11 @@ curl <span class="s2">"http://crusher.getrockerbox.com/crusher/search/timeseries
 <li>two type of logic: (union, intersection)</li>
 </ul>
 
-<h3 id="http-request">HTTP Request</h3>
+<h2 id="http-request">HTTP Request</h2>
 
 <p><code class="prettyprint">GET http://crusher.getrockerbox.com/crusher/pattern_search/&lt;QUERY_TYPE&gt;</code></p>
 
-<h3 id="query-parameters">Query Parameters</h3>
+<h2 id="query-parameters">Query Parameters</h2>
 
 <table><thead>
 <tr>
@@ -1006,7 +1049,7 @@ curl <span class="s2">"http://crusher.getrockerbox.com/crusher/search/timeseries
 </tr>
 </tbody></table>
 
-<h3 id="more-on-the-quot-search-quot-and-quot-logic-quot-parameters">More on the &ldquo;search&rdquo; and &ldquo;logic&rdquo; parameters</h3>
+<h2 id="more-on-the-quot-search-quot-and-quot-logic-quot-parameters">More on the &ldquo;search&rdquo; and &ldquo;logic&rdquo; parameters</h2>
 
 <p>The search parameter is made up of multiple <strong>URL pattern strings</strong> seperated by pipe characters. 
 A <strong>URL pattern string</strong> is a comma seperated string of values, e.g. &ldquo;nature,nuture&rdquo;.
@@ -1070,7 +1113,7 @@ When this API evaluates a URL pattern string, the indivual patterns will be eval
 </tr>
 </tbody></table>
 
-          <h2 id="multi-pattern-group-search">Multi Pattern Group search</h2>
+          <h1 id="multi-pattern-group-search">Multi Pattern Group search</h1>
 
 <p>This endpoint allows us search for statistics about the sequential intersection of multiple pattern groups. This API builds off of the pattern group concept introduced in the [Pattern Group URL Search] API.</p>
 
@@ -1085,11 +1128,11 @@ When this API evaluates a URL pattern string, the indivual patterns will be eval
 
 <p>To represent the logic between pattern groups, the &ldquo;&gt;&rdquo; operator is used to demarcate distinct pattern groups. This operators was chosen because it helps to represent the sequential nature of the computed intersection (the default behavior of the API).</p>
 
-<h3 id="http-request">HTTP Request</h3>
+<h2 id="http-request">HTTP Request</h2>
 
 <p><code class="prettyprint">GET http://crusher.getrockerbox.com/crusher/multi_pattern_search/&lt;QUERY_TYPE&gt;</code></p>
 
-<h3 id="query-parameters">Query Parameters</h3>
+<h2 id="query-parameters">Query Parameters</h2>
 
 <table><thead>
 <tr>
@@ -1120,7 +1163,7 @@ When this API evaluates a URL pattern string, the indivual patterns will be eval
 </tr>
 </tbody></table>
 
-<h3 id="more-about-multiple-pattern-group-evaluation">More about multiple pattern group evaluation</h3>
+<h2 id="more-about-multiple-pattern-group-evaluation">More about multiple pattern group evaluation</h2>
 
 <p>The search parameter is made up of multiple pattern groups seperated by <strong>&gt;</strong> characters. </p>
 
@@ -1130,7 +1173,7 @@ When this API evaluates a URL pattern string, the indivual patterns will be eval
 
 <p>When this API evaluates each pattern group, it uses the default <strong>UNION</strong> logic to evaluate the pattern group meaning that all users who visited a URL that matched either pattern in a group are included. Also note that within a pattern the default <strong>AND</strong> logic is also used.</p>
 
-<h3 id="logic-operator">Logic Operator</h3>
+<h2 id="logic-operator">Logic Operator</h2>
 
 <p>The <strong>&gt;</strong> operator then takes the result of each pattern group and evaluates either:</p>
 
@@ -1139,7 +1182,7 @@ When this API evaluates a URL pattern string, the indivual patterns will be eval
 <li>a union (a union)</li>
 </ul>
 
-<h3 id="logic-types">Logic Types:</h3>
+<h2 id="logic-types">Logic Types:</h2>
 
 <p><strong>1. Funnel (Sequential intersection)</strong></p>
 
@@ -1221,7 +1264,7 @@ When this API evaluates a URL pattern string, the indivual patterns will be eval
 <li>this is all of the information</li>
 </ul>
 
-<h3 id="example">Example</h3>
+<h2 id="example">Example</h2>
 
 <p>The following is an example of two URL pattern strings used as a search parameter:</p>
 
@@ -1248,6 +1291,17 @@ When this API evaluates a URL pattern string, the indivual patterns will be eval
 <td>Visited signup page AND visited a (nature OR wild) urls AND checked out</td>
 </tr>
 </tbody></table>
+
+          <h1 id="funnel-search">Funnel Search</h1>
+
+<p>This endpoint is very similar to the multi pattern group search, in that it allows us to access the same type of information. 
+The only difference is that the Funnel Search API takes a funnel_id as a paramater, and performs the search based on that funnel&rsquo;s settings.</p>
+
+<p>This API supports the following query result types: (count, uids, domains)</p>
+
+<h2 id="http-request">HTTP Request</h2>
+
+<p><code class="prettyprint">GET http://crusher.getrockerbox.com/crusher/funnel/search/&lt;QUERY_TYPE&gt;?id=&lt;FUNNEL_ID&gt;</code></p>
 
           <h1 id="errors">Errors</h1>
 
