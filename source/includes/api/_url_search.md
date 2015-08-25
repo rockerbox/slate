@@ -1,4 +1,4 @@
-## Pattern search
+# Pattern search
 
 > Request (count for a single pattern): 
 
@@ -181,12 +181,12 @@ The pattern search API supports:
 - four query result types (urls, uids, count, timeseries).
 - two types of logic when searching for a pattern within a URL ("or","and")
 
-### HTTP Request
+## HTTP Request
 
 `GET http://crusher.getrockerbox.com/crusher/search/<QUERY_TYPE>`
 
 
-### Query Parameters
+## Query Parameters
 
 Parameter | Default | Description
 --------- | ------- | ----------
@@ -199,7 +199,7 @@ timeout | 60 | this is the amount of time in seconds we will attempt to process 
 
 
 
-### JSON Response
+## JSON Response
 
 The JSON response will be formatted with the following fields:
 
@@ -210,7 +210,7 @@ logic | this is the logic used interally to evaluate URLs against the pattern(s)
 summary | this is a summary object describing the results. depending on the query type it will have different values but will always be present
 results | the result object is based on the query type. It will be present for all results with the exception of the count, which will only have a summary object
 
-### JSON Result Objects
+## JSON Result Objects
 
 This describes the different JSON Result object types that one can expect for the different query types
 

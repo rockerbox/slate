@@ -1,4 +1,4 @@
-## Multi Pattern Group search
+# Multi Pattern Group search
 
 This endpoint allows us search for statistics about the sequential intersection of multiple pattern groups. This API builds off of the pattern group concept introduced in the [Pattern Group URL Search] API.
 
@@ -12,11 +12,11 @@ Similar to the other search APIs. this API allows the user to specify:
 To represent the logic between pattern groups, the ">" operator is used to demarcate distinct pattern groups. This operators was chosen because it helps to represent the sequential nature of the computed intersection (the default behavior of the API).
 
 
-### HTTP Request
+## HTTP Request
 
 `GET http://crusher.getrockerbox.com/crusher/multi_pattern_search/<QUERY_TYPE>`
 
-### Query Parameters
+## Query Parameters
 
 Parameter | Default | Description
 --------- | ------- | ----------
@@ -25,7 +25,7 @@ logic     | funnel       | this specifies whether were looking at the union or i
 format    | json         | this specifies the response type. currently only json is supported
 timeout   | 60           | this is the amount of time in seconds we will attempt to process the query before timing out. Its default and max value is 60 seconds
 
-### More about multiple pattern group evaluation
+## More about multiple pattern group evaluation
 
 The search parameter is made up of multiple pattern groups seperated by **>** characters. 
 
@@ -35,14 +35,14 @@ The search parameter is made up of multiple pattern groups seperated by **>** ch
 
 When this API evaluates each pattern group, it uses the default **UNION** logic to evaluate the pattern group meaning that all users who visited a URL that matched either pattern in a group are included. Also note that within a pattern the default **AND** logic is also used.
 
-### Logic Operator
+## Logic Operator
 
 The **>** operator then takes the result of each pattern group and evaluates either:
 
 - a sequential intersection (a funnel)
 - a union (a union)
 
-### Logic Types: 
+## Logic Types: 
 
 **1. Funnel (Sequential intersection)**
 
@@ -89,7 +89,7 @@ implying that each sequential group will be larger than the previous.
 - this is all of the information
 
 
-### Example
+## Example
 
 The following is an example of two URL pattern strings used as a search parameter:
 
@@ -102,7 +102,3 @@ Step | Users
 1    | Visited signup page
 2    | Visited signup page AND visited a (nature OR wild) urls
 3    | Visited signup page AND visited a (nature OR wild) urls AND checked out
-
-
-
-

@@ -1,4 +1,4 @@
-## Group URL Search
+# Group URL Search
 
 This endpoint allows us search for users who visited multiple URL patterns and get the union or intersection of the visits that have occured on these matched pages. 
 
@@ -7,11 +7,11 @@ Similar to the the single URL search, this API support:
 - the query result types: (uids,count,timeseries)
 - two type of logic: (union, intersection)
 
-### HTTP Request
+## HTTP Request
 
 `GET http://crusher.getrockerbox.com/crusher/pattern_search/<QUERY_TYPE>`
 
-### Query Parameters
+## Query Parameters
 
 Parameter | Default | Description
 --------- | ------- | ----------
@@ -20,7 +20,7 @@ logic     | intersection | this specifies whether were looking at the union or i
 format    | json | this specifies the response type. currently only json is supported
 timeout | 60 | this is the amount of time in seconds we will attempt to process the query before timing out. Its default and max value is 60 seconds
 
-### More on the "search" and "logic" parameters
+## More on the "search" and "logic" parameters
 
 The search parameter is made up of multiple **URL pattern strings** seperated by pipe characters. 
 A **URL pattern string** is a comma seperated string of values, e.g. "nature,nuture".

@@ -62,6 +62,7 @@ curl http://crusher.getrockerbox.com/crusher/funnel/action?format=json
 
 ```json
 {
+    "status": "ok",
     "response":[
         {
             "advertiser": "my_advertiser",
@@ -98,6 +99,7 @@ curl http://crusher.getrockerbox.com/crusher/funnel/action?format=json&id=1
 
 ```json
 {
+    "status": "ok",
     "response":[{
         "advertiser": "my_advertiser",
         "action_name": "checkout",
@@ -131,6 +133,7 @@ curl -X POST -d @action http://crusher.getrockerbox.com/crusher/funnel/action
 
 ```json
 {
+    "status": "ok",
     "response":{
         "advertiser": "my_advertiser",
         "action_name": "checkout",
@@ -166,6 +169,7 @@ curl -X PUT -d @action http://crusher.getrockerbox.com/crusher/funnel/action?id=
 
 ```json
 {
+    "status": "ok",
     "response":{
         "advertiser": "my_advertiser",
         "action_name": "checkout",
@@ -193,6 +197,7 @@ curl -X DELETE http://crusher.getrockerbox.com/crusher/funnel/action?id=1
 
 ```json
 {
+    "status": "ok",
     "response":{
         "action_id": 1
     }

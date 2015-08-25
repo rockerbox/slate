@@ -16,8 +16,7 @@ includes:
   - api/url_search
   - api/multiple_url_search
   - api/sequential_url_pattern_search
-
-
+  - api/funnel_search
 
   - errors
 
