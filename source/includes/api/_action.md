@@ -1,25 +1,3 @@
-# Model APIs
-
-The model APIs allow us to model information that we receive from an on page pixel. These APIs are the building blocks for our UI and allow the user to store saved and recurring data queries.
-
-### Generic anatomy of a Response
-
-```json
-{
-    "response": [],
-    "summary": {},
-    "errors": []
-}
-```
-
-Each json response with have a similar format. Below we outline the high level stucture a user can expect from a JSON response.
-
-Key | Description
---- | ----------
-response | (required) This is where the data relevant to the response lives. This will typically be an array of objects
-summary  | (optional) This is where any summary information about the request and response lives
-errors   | (optional) This is where any errors associated with the request live. This will typically be an array of objects
-
 # Action
 
 > Example action
@@ -28,7 +6,8 @@ errors   | (optional) This is where any errors associated with the request live.
 {
     "action_id": 1,
     "action_name": "checkout",
-    "acvertiser": "my_advertiser",
+    "advertiser": "my_advertiser",
+    "action_type": "segment",
     "url_pattern": ["checkout"]
 }
 ```
@@ -48,6 +27,7 @@ action_id | this is an auto generated identifier for the action. this identifier
 url_pattern | this is an array of strings that are used to match against the url associated with an event
 operator | by default, this should only be set to "or". The behavior associated with an "and" operator can be achieved by comma seperating strings
 advertiser | this is the advertiser that the action is associated with
+action_type | (optional) value of either "segment" or "vendor" will return only the url_patterns with that action type if specified
 
 
 ## Get all actions
