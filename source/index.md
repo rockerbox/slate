@@ -13,10 +13,9 @@ includes:
   - api/action
   - api/funnel
   - api/onsite
-  - api/url_search
-  - api/multiple_url_search
-  - api/sequential_url_pattern_search
-  - api/funnel_search
+  - api/udf
+  - api/endpoints
+  - api/cache
 
   - errors
 

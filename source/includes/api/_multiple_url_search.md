@@ -1,4 +1,4 @@
-# Group URL Search
+# Group URL Search (DEPRECATED)
 
 This endpoint allows us search for users who visited multiple URL patterns and get the union or intersection of the visits that have occured on these matched pages. 
 
